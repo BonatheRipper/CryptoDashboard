@@ -1,11 +1,10 @@
 import React from "react";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <div className="text-green-500 text-4xl">
-      AppAppAppAppAppAppAppAppAppAppAppAppAppAppAppAppAppAppAppAppAppApp App App
-      App App AppApp App App App App AppApp App App App App AppApp AppApp App
-      App App App App
+    <div className="relative w-full">
+      <Navbar />
     </div>
   );
 };
