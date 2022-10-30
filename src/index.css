@@ -11,3 +11,25 @@
 #tradingview_widget_wrapper > div:nth-child(2) {
   display: none;
 }
+.bg1 {
+  background-color: #49b1ce;
+}
+.bg2 {
+  background-color: #2886df;
+}
+.bg3 {
+  background-color: #6f62e7;
+}
+.cardSkin1 {
+  background-color: black;
+}
+.cardSkin2 {
+  background-image: linear-gradient(
+    to right top,
+    #0c0537,
+    #440b51,
+    #7f005d,
+    #b9005b,
+    #eb124b
+  );
+}

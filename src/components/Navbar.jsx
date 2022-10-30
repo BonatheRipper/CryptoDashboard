@@ -27,7 +27,7 @@ const Navbar = () => {
     setFlagImage(lang);
   };
   return (
-    <div className="w-full  border  fixed top-0 shadow  flex flex-col  bg-white">
+    <div className="w-full  border z-40 fixed top-0 shadow  flex flex-col  bg-white">
       <div className="w-full px-4 flex flex-row justify-between items-center ">
         <div className="flex  justify-start  md:justify-between items-center">
           <HiOutlineMenuAlt2 className="text-xl mr-2 text-[#464698] hover:text-[#7070f1] transform scale-100 hover:scale-110 " />
