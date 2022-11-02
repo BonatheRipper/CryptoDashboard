@@ -23,6 +23,53 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import {
+  paginatePageToDisplay,
+  paginateNumbersLength,
+  paginatePager,
+} from "../utils/Paginate";
+import ClipLoader from "react-spinners/ClipLoader";
+
+function genCardNum() {
+  let sixTeenDigits = [];
+  for (let i = 0; i < 4; i++) {
+    sixTeenDigits.push(Math.floor(Math.random() * 9999 + 1));
+  }
+  return sixTeenDigits;
+}
+function genExpirreDate() {
+  return `0${Math.floor(Math.random() * 8 + 1)}/${Math.floor(
+    Math.random() * 8 + 1
+  )}${Math.floor(Math.random() * 8 + 1)}`;
+}
+function typeOfStatus(status) {
+  if (status.toLowerCase() === "pending") {
+    return <BiMinus className="mr-2" />;
+  } else if (status.toLowerCase() === "completed") {
+    return <BsCheck className="mr-2" />;
+  } else {
+    return <MdClear className="mr-2" />;
+  }
+}
+function typeOfStatusColor(status) {
+  if (status.toLowerCase() === "pending") {
+    return "yellow";
+  } else if (status.toLowerCase() === "completed") {
+    return "green";
+  } else {
+    return "red";
+  }
+}
+function typeOfName(status) {
+  if (
+    status.toLowerCase() === "pending" ||
+    status.toLowerCase() === "completed"
+  ) {
+    return ["bg-[#c4c9f1] text-gray-600", <BsArrowDownShort />];
+  } else {
+    return ["bg-red-500 text-gray-300", <BsArrowUpShort />];
+  }
+}
 const data = [
   {
     name: "3",
@@ -55,9 +102,200 @@ const data = [
     amt: 2100,
   },
 ];
+const currency = [
+  { name: "GBP", rate: 851 },
+  { name: "USD", rate: 800 },
+  { name: "EUR", rate: 750 },
+  { name: "NGN", rate: 1 },
+];
+
 const transactionStatus = ["Completed", "Pending", "Cancelled"];
 const transactionMeridian = ["am", "pm"];
+const cardSkin = ["cardSkin1", "cardSkin2", "cardSkin3", "cardSkin4"];
+
 const transactionData = [
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
+  {
+    name: "Bona Andrews",
+    amount: `$${Math.floor(Math.random() * 900 + 1)}`,
+    time: `0${Math.floor(Math.random() * 8 + 1)}:${Math.floor(
+      Math.random() * 98 + 1
+    )}${
+      transactionMeridian[
+        Math.floor(Math.random() * transactionMeridian.length)
+      ]
+    }`,
+    status:
+      transactionStatus[Math.floor(Math.random() * transactionStatus.length)],
+  },
   {
     name: "Bona Andrews",
     amount: `$${Math.floor(Math.random() * 900 + 1)}`,
@@ -181,76 +419,46 @@ const PamentItem = ({ bg, icon, header, body }) => {
   );
 };
 const Dashboard = () => {
-  const cards = [
+  const [cards, setCards] = useState([
     {
-      name: "Micheal Orji",
+      name: "Micheal Orjis",
       cardNumber: genCardNum(),
       skin: "cardSkin1",
       date: genExpirreDate(),
       balance: `+$${Math.floor(Math.random() * 500 + 1)}`,
     },
-    {
-      name: "Micheal Orji",
-      cardNumber: genCardNum(),
-      skin: "cardSkin1",
-      date: genExpirreDate(),
-      balance: `+$${Math.floor(Math.random() * 500 + 1)}`,
-    },
-    {
-      name: "Micheal Orji",
-      cardNumber: genCardNum(),
-      skin: "cardSkin1",
-      date: genExpirreDate(),
-      balance: `+$${Math.floor(Math.random() * 500 + 1)}`,
-    },
-  ];
+  ]);
   const [currentCard, setCurrentCard] = useState(cards[0]);
-
-  function genCardNum() {
-    let sixTeenDigits = [];
-    for (let i = 0; i < 4; i++) {
-      sixTeenDigits.push(Math.floor(Math.random() * 9999 + 1));
+  const [currentTable, setCurrentTable] = useState(1);
+  const [ordersPerTable, setOrdersPerTable] = useState(8);
+  const [trans, setTrans] = useState(transactionData);
+  const [currencyType, setCurrencyType] = useState(currency[0].rate);
+  const [amountToBuy, setAmountToBuy] = useState("");
+  const [buySell, setBuySell] = useState(true);
+  const indexOfLastTable = currentTable * ordersPerTable;
+  const indexOfFirstTable = indexOfLastTable - ordersPerTable;
+  const [creatingCard, setCreatingCard] = useState(false);
+  function createNewCard() {
+    setCreatingCard(true);
+    function start() {
+      setCards((prev) => [
+        ...prev,
+        {
+          name: "Micheal Orjis",
+          cardNumber: genCardNum(),
+          skin: cardSkin[Math.floor(Math.random() * cardSkin.length)],
+          date: genExpirreDate(),
+          balance: `+$${Math.floor(Math.random() * 500 + 1)}`,
+        },
+      ]);
+      return setCreatingCard(false);
     }
-    return sixTeenDigits;
-  }
-  function genExpirreDate() {
-    return `0${Math.floor(Math.random() * 8 + 1)}/${Math.floor(
-      Math.random() * 8 + 1
-    )}${Math.floor(Math.random() * 8 + 1)}`;
-  }
-  function typeOfStatus(status) {
-    if (status.toLowerCase() === "pending") {
-      return <BiMinus className="mr-2" />;
-    } else if (status.toLowerCase() === "completed") {
-      return <BsCheck className="mr-2" />;
-    } else {
-      return <MdClear className="mr-2" />;
-    }
-  }
-  function typeOfStatusColor(status) {
-    if (status.toLowerCase() === "pending") {
-      return "yellow";
-    } else if (status.toLowerCase() === "completed") {
-      return "green";
-    } else {
-      return "red";
-    }
-  }
-  function typeOfName(status) {
-    if (
-      status.toLowerCase() === "pending" ||
-      status.toLowerCase() === "completed"
-    ) {
-      return ["bg-[#c4c9f1] text-gray-600", <BsArrowDownShort />];
-    } else {
-      return ["bg-red-500 text-gray-300", <BsArrowUpShort />];
-    }
+    setTimeout(start, 5000);
   }
   return (
     <>
-      {" "}
-      <div className="text-black mt-8 py-8 md:pb-12 md:pt-24 md:px-12   px-2 w-full flex md:flex-row flex-col justify-center items-start relative">
-        <div className="w-full md:w-5/12  md:mx-4 md:my-0 my-2 ">
+      <div className="text-black  h-full mt-8 py-8 md:pb-12 md:pt-24   px-2 w-full flex md:flex-row flex-col justify-center  relative">
+        <div className="w-full md:w-5/12  md:mx-4 md:my-0 my-2  ">
           <div className="flex text-white transform  bg-gradient-to-r from-[#667ce4] to-[#744ca5] rounded-xl h-28 border  px-6 md:px-8 flex-col  justify-center items-start">
             <div className="flex justify-start items-center font-thin text-sm md:text-base">
               <BsCalendarCheckFill className="mr-2" />
@@ -307,7 +515,7 @@ const Dashboard = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="w-full rounded-xl items-stretch h-full shadow md:w-3/12  bg-white text-white md:mx-4 md:my-0 my-2 px-6   py-3 flex justify-start    flex-col">
+        <div className="w-full rounded-xl   shadow md:w-3/12  bg-white text-white md:mx-4 md:my-0 my-2 px-6   py-3 flex justify-start    flex-col">
           <h1 className="font-medium text-black text-lg md:text-xl  mt-4 w-full  ">
             Make Payment
           </h1>
@@ -329,7 +537,7 @@ const Dashboard = () => {
             header="International Payment"
             body="Make payments in any currency"
           />
-        </div>{" "}
+        </div>
         <div className="w-full rounded-xl   shadow md:w-3/12  bg-white text-white md:mx-4 md:my-0 my-2 px-6   py-8 flex justify-start  items-center  flex-col">
           <h1 className="font-medium text-black text-lg md:text-xl  mt-4 w-full  ">
             Cards
@@ -371,21 +579,43 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full text-black  justify-start items-center flex-row mt-2 mb-3 px-2">
+          <div
+            className={`flex w-full text-black  justify-start items-center flex-row mt-2 mb-3 px-2`}
+          >
             <p className="text-xs font-bold">Cards:</p>
-            {[1, 2, 3, 4].map((card, i) => (
+            {cards.map((card, i) => (
               <div
+                onClick={() => setCurrentCard(cards[i])}
                 key={i}
-                className=" text-xs mx-2 w-5 h-5 rounded-full border border-black flex justify-center items-center "
+                className={`${
+                  currentCard.cardNumber === card.cardNumber
+                    ? `${card.skin} text-white `
+                    : "border-black text-black"
+                } text-xs mx-2 w-5 h-5 rounded-full border flex justify-center items-center `}
               >
-                {card}
+                {i + 1}
               </div>
             ))}
           </div>
           <div className="flex flex-row justify-start px-1 w-full hover:animate-pulse my-2">
-            <div className="flex flex-row justify-start border px-1 py-1 rounded-xl shadow">
-              <div className="px-1 py-1 rounded-full bg-[#c6c6fa] text-[#424290]">
-                <BsPlus className="text-xs" />
+            <div
+              onClick={() => createNewCard()}
+              className="flex flex-row justify-start border px-1 py-1 rounded-xl shadow"
+            >
+              <div className="px-1 py-1 rounded-full bg-[#c6c6fa] text-[#424290] flex">
+                <>
+                  {!creatingCard ? (
+                    <BsPlus className="text-xs" />
+                  ) : (
+                    <ClipLoader
+                      color={"#232356"}
+                      loading={true}
+                      size={10}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  )}
+                </>
               </div>
               <button className="font-bold text-xs text-black mx-3">
                 Create card
@@ -394,7 +624,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="text-black  py-8 md:py-8 md:px-12  px-2 w-full flex md:flex-row flex-col justify-start items-center relative">
+
+      <div className="text-black  py-8 md:py-8 md:px-12  px-2 w-full flex md:flex-row flex-col justify-between items-start relative">
         <div className="w-full md:w-8/12  border bg-white rounded-xl shadow flex flex-col justify-start px-4 py-2">
           <div className="flex flex-row justify-between w-full items-center my-4">
             <h6 className="font-bold md:text-base text-xs">
@@ -426,7 +657,11 @@ const Dashboard = () => {
                 Status
               </th>
             </tr>
-            {transactionData.map((item, i) => (
+            {paginatePageToDisplay(
+              trans,
+              indexOfFirstTable,
+              indexOfLastTable
+            ).map((item, i) => (
               <tr
                 key={i}
                 className="flex transform scale-100 hover:scale-110 md:hover:scale-95 flex-row justify-between items-center w-full border-t"
@@ -464,13 +699,108 @@ const Dashboard = () => {
               </tr>
             ))}
           </table>
+          <div className="flex w-full justify-start items-center mt-1 mb-4 ">
+            {paginateNumbersLength(trans, ordersPerTable).map((item, i) => (
+              <button
+                key={i}
+                onClick={() => paginatePager(setCurrentTable, item)}
+                className={`flex justify-center items-center md:w-8 md:h-8  w-6 h-6 mx-2 rounded-full border border-[#9782b7]  hover:bg-[#9782b7] ${
+                  item === currentTable
+                    ? "bg-[#9782b7] text-gray-100"
+                    : "text-[#9782b7]"
+                } hover:text-white text-sm md:text-base`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
           <div className="flex w-full justify-end items-end mt-1 mb-4 ">
-            <button className="px-6 py-1  rounded-lg border border-[#9782b7] text-[#9782b7] hover:bg-black hover:text-white text-sm md:text-base">
-              See all
+            <button
+              onClick={() =>
+                setOrdersPerTable(
+                  ordersPerTable < trans.length ? trans.length : 8
+                )
+              }
+              className="px-6 py-1  rounded-lg border border-[#9782b7] text-[#9782b7] hover:bg-[#9782b7] hover:text-white text-sm md:text-base"
+            >
+              {ordersPerTable < trans.length ? "Sell all" : "See less"}
+            </button>
+          </div>
+        </div>
+        <div className="w-full md:w-3/12  md:mx-4 my-4 md:my-0 border bg-white rounded-xl shadow flex flex-col justify-start px-4 py-2">
+          <h1 className="font-medium text-black text-lg md:text-xl  mt-4 w-full  ">
+            Exchange
+          </h1>
+          <div className="flex my-4 flex-row justify-end items-center w-full relative">
+            <div
+              onClick={() => setBuySell(true)}
+              className={`absolute w-6/12 left-2 ${
+                buySell ? "bg-[#5e5ef1] text-white" : "bg-white"
+              } hover:bg-[#5e5ef1] hover:text-white w-full rounded-tl-xl rounded-br-xl  flex justify-center items-center border  py-3 `}
+            >
+              Buy
+            </div>
+            <div
+              onClick={() => setBuySell(false)}
+              className={` right-0  ${
+                !buySell ? "bg-[#5e5ef1] text-white" : "bg-white"
+              } hover:bg-[#5e5ef1] hover:text-white w-6/12 rounded-br-xl  border py-3 flex justify-center items-center `}
+            >
+              Sell
+            </div>
+          </div>
+          <div className="w-full flex flex-col my-2 ">
+            <h6 className="my-2 text-gray-600 text-sm md:text-base">
+              Amount to buy
+            </h6>
+            <input
+              placeholder="Enter amount"
+              onChange={(e) => setAmountToBuy(e.target.value)}
+              value={amountToBuy}
+              type="number"
+              className="w-full px-4 py-3 border border-gray-300 outline-none rounded-lg"
+            />
+          </div>
+          <div className="w-full flex flex-col my-2 ">
+            <h6 className="my-2 text-gray-600 text-sm md:text-base">
+              Buy currency
+            </h6>
+            <select
+              onChange={(e) => setCurrencyType(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 outline-none rounded-lg"
+            >
+              {currency.map((item, i) => (
+                <option key={i} value={item.rate}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full flex flex-col my-2 ">
+            <h6 className="my-2 text-gray-800 md:text-base flex items-center text-xs">
+              <span className="text-xs">Rate to ₦ </span>{" "}
+              <span className="mx-2 text-xs">=</span>
+              <span className="text-xs text-[#5e5ef1]">{`${currencyType}.00`}</span>
+            </h6>
+            <input
+              placeholder="0000"
+              value={`${currencyType * amountToBuy}.00`}
+              disabled
+              className="w-full px-4 py-3 border border-gray-300 outline-none rounded-lg text-black"
+            />
+          </div>
+          <div className="w-full flex flex-col my-6 ">
+            <button className="py-3 w-full bg-[#5e5ef1] hover:bg-[#242482] text-white rounded-lg">
+              Exchange now
             </button>
           </div>
         </div>
       </div>
+      <>
+        <div className="text-yellow-800 bg-yellow-100 hidden"></div>
+        <div className="text-green-800 bg-green-100 hidden"></div>
+        <div className="text-red-800 bg-red-100 hidden"></div>
+      </>
     </>
   );
 };

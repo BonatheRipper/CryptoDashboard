@@ -11,6 +11,8 @@ import {
 import { BsDot } from "react-icons/bs";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import usaFlag from "../images/flags/usa.png";
+import avata from "../images/avatar/avatar.jpg";
+
 import great_britain from "../images/flags/great-britain.png";
 import { useState } from "react";
 
@@ -72,7 +74,7 @@ const Navbar = () => {
             <div className="relative w-8 md:w-10 transform scale-100 hover:scale-110 ">
               <BsDot className="absolute text-3xl md:text-3xl z-40   -bottom-3 left-3 md:left-5  text-green-400" />
               <img
-                src="https://mir-s3-cdn-cf.behance.net/user/100/9d7974541619159.62adc47f1233d.jpg"
+                src={avata}
                 alt="userImage"
                 className="rounded-full  w-full  md:w-10 md:h-10"
               />
