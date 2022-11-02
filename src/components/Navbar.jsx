@@ -1,8 +1,8 @@
 import React from "react";
-import { FaBtc } from "react-icons/fa";
+import { FaBtc, FaUserAlt, FaUserEdit } from "react-icons/fa";
 import { AiFillBell } from "react-icons/ai";
 import { TickerTape } from "react-ts-tradingview-widgets";
-
+import { TbActivityHeartbeat } from "react-icons/tb";
 import {
   MdEmail,
   MdKeyboardArrowDown,
@@ -15,6 +15,7 @@ import avata from "../images/avatar/avatar.jpg";
 
 import great_britain from "../images/flags/great-britain.png";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Navbar = ({ setSidemenu, sidemenu }) => {
   const logo = { 1: <FaBtc />, 2: <div className="font-bold">Chipacks</div> };
@@ -34,7 +35,7 @@ const Navbar = ({ setSidemenu, sidemenu }) => {
         <div className="flex  justify-start  md:justify-between items-center">
           <HiOutlineMenuAlt2
             onClick={() => setSidemenu(!sidemenu)}
-            className="text-xl mr-2 text-[#464698] hover:text-[#7070f1]   transform scale-100 hover:scale-150"
+            className="text-xl mr-2 text-[#464698] hover:text-[#7070f1]  md:hidden transform scale-100 hover:scale-150"
           />
           <div className=" py-4 flex items-center md:text-3xl text-lg text-[#7070f1] hover:text-[#6464e5] ">
             {logo[1]}
@@ -61,10 +62,16 @@ const Navbar = ({ setSidemenu, sidemenu }) => {
         </div>
         <div className="flex  justify-between items-center">
           <div className=" flex justify-center items-center">
-            <div className="py-2 px-2 md:py-3 md:px-3 transform scale-100 hover:scale-110 md:text-xl rounded-full bg-[#c9cafa] hover:bg-[#b0b1e7] text-[#7574f5] mx-1 md:mx-4 flex justify-center items-center">
+            <div
+              onClick={() => toast.error("Ooops! Still in works")}
+              className="py-2 px-2 md:py-3 md:px-3 transform scale-100 hover:scale-110 md:text-xl rounded-full bg-[#c9cafa] hover:bg-[#b0b1e7] text-[#7574f5] mx-1 md:mx-4 flex justify-center items-center"
+            >
               <MdEmail />
             </div>
-            <div className="py-2 px-2 md:py-3 md:px-3 transform scale-100 hover:scale-110    md:text-xl rounded-full bg-[#c9cafa] hover:bg-[#b0b1e7] relative text-[#7574f5] mx-1 md:mx-4 flex justify-center items-center">
+            <div
+              onClick={() => toast.error("Ooops! Still in works")}
+              className="py-2 px-2 md:py-3 md:px-3 transform scale-100 hover:scale-110    md:text-xl rounded-full bg-[#c9cafa] hover:bg-[#b0b1e7] relative text-[#7574f5] mx-1 md:mx-4 flex justify-center items-center"
+            >
               <BsDot className="absolute text-2xl md:text-3xl z-40 top-0  ml-2  text-red-600" />
               <AiFillBell />
             </div>
@@ -99,10 +106,35 @@ const Navbar = ({ setSidemenu, sidemenu }) => {
           </div>
         </div>
         <div
-          className={`absolute md:w-4/12 w-7/12 h-20 border border-red-500 -bottom-20 ${
+          className={`absolute md:w-2/12 w-7/12  border bg-white -bottom-28 ${
             profile ? "right-0" : "-right-full"
-          } `}
-        ></div>
+          } flex flex-col justify-start items-center`}
+        >
+          <ul className="w-full py-2 px-2 text-sm ">
+            <a
+              href="/"
+              className="flex  items-center my-2 text-black hover:text-[#7070f1] "
+            >
+              <FaUserAlt />
+              <span className="mx-2 ">Profile</span>
+            </a>
+            <a
+              href="/"
+              className="flex  items-center my-2 text-black hover:text-[#7070f1] "
+            >
+              <FaUserEdit />
+
+              <span className="mx-2 ">Edit Profile</span>
+            </a>
+            <a
+              href="/"
+              className="flex  items-center my-2 text-black hover:text-[#7070f1] "
+            >
+              <TbActivityHeartbeat />
+              <span className="mx-2 ">Account activities</span>
+            </a>
+          </ul>
+        </div>
       </div>
       <div className="hidden md:inline w-full">
         {" "}

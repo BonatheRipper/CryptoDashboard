@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
+import { toast } from "react-toastify";
 
 const Sidebar = ({ sidemenu, setSidemenu }) => {
   const [currentItem, setCurrentItem] = useState("dashboard");
@@ -8,7 +9,7 @@ const Sidebar = ({ sidemenu, setSidemenu }) => {
   const handleMenuBtnClick = (item) => {
     setCurrentItem(item);
     if (item.toLowerCase() !== "dashboard") {
-      alert("Oops! button currently in developement");
+      toast.error("Oops! button currently in developement");
     }
   };
   return (
