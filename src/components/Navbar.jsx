@@ -16,7 +16,7 @@ import avata from "../images/avatar/avatar.jpg";
 import great_britain from "../images/flags/great-britain.png";
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ setSidemenu, sidemenu }) => {
   const logo = { 1: <FaBtc />, 2: <div className="font-bold">Chipacks</div> };
   const languages = [
     { image: usaFlag, country: "EN" },
@@ -32,7 +32,10 @@ const Navbar = () => {
     <div className="w-full  border z-40 fixed top-0 shadow  flex flex-col  bg-white">
       <div className="w-full px-4 flex flex-row justify-between items-center ">
         <div className="flex  justify-start  md:justify-between items-center">
-          <HiOutlineMenuAlt2 className="text-xl mr-2 text-[#464698] hover:text-[#7070f1] transform scale-100 hover:scale-110 " />
+          <HiOutlineMenuAlt2
+            onClick={() => setSidemenu(!sidemenu)}
+            className="text-xl mr-2 text-[#464698] hover:text-[#7070f1]   transform scale-100 hover:scale-150"
+          />
           <div className=" py-4 flex items-center md:text-3xl text-lg text-[#7070f1] hover:text-[#6464e5] ">
             {logo[1]}
             {logo[2]}
